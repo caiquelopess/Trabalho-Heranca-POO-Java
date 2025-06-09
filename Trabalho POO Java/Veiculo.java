@@ -5,7 +5,10 @@ public class Veiculo {
     private double velocidadeAtual;
 
     // Construtor, inicializa modelo, ano e velocidade
-    public Veiculo(String modelo, int ano) {
+    public Veiculo(String modelo, int ano) throws AnoInvalidoException {
+        if (ano < 1900) {
+            throw new AnoInvalidoException("Ano inválido para o veículo: " + ano);
+        }
         this.modelo = modelo;
         this.ano = ano;
         this.velocidadeAtual = 0.0;
@@ -29,8 +32,7 @@ public class Veiculo {
     // Aumenta a velocidade atual
     public void acelerar(double valorAumentar) {
         if (valorAumentar < 0) {
-            System.out.println("Erro: valor para aumentar a velocidade não pode ser negativo.");
-            return;
+            throw new IllegalArgumentException("Valor para aumentar a velocidade não pode ser negativo.");
         }
         velocidadeAtual += valorAumentar;
     }
@@ -38,12 +40,10 @@ public class Veiculo {
     // Reduz a velocidade atual
     public void frear(double valorReduzir) {
         if (valorReduzir < 0) {
-            System.out.println("Erro: valor para reduzir a velocidade não pode ser negativo.");
-            return;
+            throw new IllegalArgumentException("Valor para reduzir a velocidade não pode ser negativo.");
         }
         if (valorReduzir > velocidadeAtual) {
-            System.out.println("Erro: valor para reduzir é maior que a velocidade atual.");
-            return;
+            throw new IllegalArgumentException("Valor para reduzir é maior que a velocidade atual.");
         }
         velocidadeAtual -= valorReduzir;
     }

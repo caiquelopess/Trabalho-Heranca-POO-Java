@@ -4,7 +4,7 @@ public class Carro extends Veiculo {
     private int numeroPortas;
 
     // Construtor do carro
-    public Carro(String modelo, int ano, int numeroPortas) {
+    public Carro(String modelo, int ano, int numeroPortas) throws AnoInvalidoException {
         super(modelo, ano);
         this.numeroPortas = numeroPortas;
     }

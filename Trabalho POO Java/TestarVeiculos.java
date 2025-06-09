@@ -1,40 +1,61 @@
 public class TestarVeiculos {
     public static void main(String[] args) {
-        // Instancia o objeto Carro
-        Carro carro = new Carro("Sedan", 2023, 4);
+        try {
+            // Instancia o objeto Carro
+            Carro carro = new Carro("Sedan", 1820, 4);
 
-        // Instancia o objeto Moto
-        Moto moto = new Moto("Esportiva", 2024, 600);
+            // Instancia o objeto Moto
+            Moto moto = new Moto("Esportiva", 2024, 600);
 
-        // Exibe informações iniciais
-        System.out.println("Informações iniciais:");
-        carro.exibirInformacoes();
-        System.out.println();
-        moto.exibirInformacoes();
+            // Exibe informações iniciais
+            System.out.println("Informações iniciais:");
+            carro.exibirInformacoes();
+            System.out.println();
+            moto.exibirInformacoes();
 
-        // Aumenta a velocidade dos veículos
-        carro.acelerar(30);
-        moto.acelerar(50);
+            // Aumenta a velocidade dos veículos
+            try {
+                carro.acelerar(30);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro ao acelerar carro: " + e.getMessage());
+            }
+            try {
+                moto.acelerar(50);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro ao acelerar moto: " + e.getMessage());
+            }
 
-        // Exibe informações após acelerar
-        System.out.println("\nApós acelerar:");
-        carro.exibirInformacoes();
-        System.out.println();
-        moto.exibirInformacoes();
+            // Exibe informações após acelerar
+            System.out.println("\nApós acelerar:");
+            carro.exibirInformacoes();
+            System.out.println();
+            moto.exibirInformacoes();
 
-        // Reduz a velocidade dos veículos
-        carro.frear(50);
-        moto.frear(20);
+            // Reduz a velocidade dos veículos
+            try {
+                carro.frear(50);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro ao frear carro: " + e.getMessage());
+            }
+            try {
+                moto.frear(20);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro ao frear moto: " + e.getMessage());
+            }
 
-        // Exibir informações depois de frear
-        System.out.println("\nApós frear:");
-        carro.exibirInformacoes();
-        System.out.println();
-        moto.exibirInformacoes();
+            // Exibir informações depois de frear
+            System.out.println("\nApós frear:");
+            carro.exibirInformacoes();
+            System.out.println();
+            moto.exibirInformacoes();
 
-        // Chamar os outros métodos
-        System.out.println();
-        carro.abrirPorta();
-        moto.empinar();
+            // Chamar os outros métodos
+            System.out.println();
+            carro.abrirPorta();
+            moto.empinar();
+
+        } catch (AnoInvalidoException e) {
+            System.out.println("Erro ao criar veículo: " + e.getMessage());
+        }
     }
 }

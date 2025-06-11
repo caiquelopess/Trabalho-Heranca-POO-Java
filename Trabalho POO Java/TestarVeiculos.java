@@ -2,7 +2,7 @@ public class TestarVeiculos {
     public static void main(String[] args) {
         try {
             // Instancia o objeto Carro
-            Carro carro = new Carro("Sedan", 1820, 4);
+            Carro carro = new Carro("Sedan", 2024, 4);
 
             // Instancia o objeto Moto
             Moto moto = new Moto("Esportiva", 2024, 600);
@@ -54,6 +54,27 @@ public class TestarVeiculos {
             carro.abrirPorta();
             moto.empinar();
 
+            // Cria os simuladores de viagem
+            SimuladorViagem simCarro = new SimuladorViagem(carro);
+            SimuladorViagem simMoto = new SimuladorViagem(moto);
+
+            // Inicia as simulações em threads separadas
+            Thread t1 = new Thread(simCarro);
+            Thread t2 = new Thread(simMoto);
+
+            // Inicia as threads
+            t1.start();
+            t2.start();
+
+            // Aguarda a conclusão das threads
+            try {
+                t1.join();
+                t2.join();
+            } catch (InterruptedException e) {
+                System.out.println("Simulação interrompida.");
+            }
+
+        // Exceção ao criar veículo
         } catch (AnoInvalidoException e) {
             System.out.println("Erro ao criar veículo: " + e.getMessage());
         }
